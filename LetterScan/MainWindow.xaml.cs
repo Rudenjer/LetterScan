@@ -112,8 +112,7 @@ namespace LetterScan
 
         private void UpdateRectangles()
         {
-            int ind;
-            ind = 0;
+            int ind = 0;
 
             foreach (Rectangle rec in Rectangles.Values)
             {
@@ -131,31 +130,63 @@ namespace LetterScan
             }
         }
 
-        private void AnalisysTextEnter_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void CodeTextEnter_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            char[] inputString = TB1.Text.ToCharArray();
-            string outputString = "";
-            int shift = Convert.ToInt32(TBNumber.Text);
-            int ind = 0;
-            foreach (char letter in inputString)
+            if (ModeList.Text == "Cipher")
             {
-                if (LatAlphabet.Contains(letter.ToString()))
+                char[] inputString = TB1.Text.ToCharArray();
+                string outputString = "";
+                int shift = Convert.ToInt32(TBNumber.Text);
+                int ind = 0;
+                foreach (char letter in inputString)
                 {
-                    int letterNum = Array.IndexOf(LatAlphabet, inputString[ind].ToString());
-                    letterNum = (letterNum + shift)%(LatAlphabet.Length);
+                    if (LatAlphabet.Contains(letter.ToString()))
+                    {
+                        int letterNum = Array.IndexOf(LatAlphabet, inputString[ind].ToString());
+                        letterNum = (letterNum + shift)%(LatAlphabet.Length);
 
-                    outputString += LatAlphabet[letterNum];
-                }
-                else
-                {
-                    outputString += letter;
+                        outputString += LatAlphabet[letterNum];
+                    }
+                    else
+                    {
+                        outputString += letter;
 
+                    }
+                    ind++;
                 }
-                ind++;
+
+                TB2.Text = outputString;
             }
 
-            TB2.Text = outputString;
+        }
 
+        private void DecodeTextEnter_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ModeList.Text == "Decipher")
+            {
+                char[] inputString = TB2.Text.ToCharArray();
+                string outputString = "";
+                int shift = Convert.ToInt32(TBNumber.Text);
+                int ind = 0;
+                foreach (char letter in inputString)
+                {
+                    if (LatAlphabet.Contains(letter.ToString()))
+                    {
+                        int letterNum = Array.IndexOf(LatAlphabet, inputString[ind].ToString());
+                        letterNum = (letterNum - shift+LatAlphabet.Length) % (LatAlphabet.Length);
+
+                        outputString += LatAlphabet[letterNum];
+                    }
+                    else
+                    {
+                        outputString += letter;
+
+                    }
+                    ind++;
+                }
+
+                TB1.Text = outputString;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
