@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="525">
     <Grid Margin="0,0,0,0" x:Name="MainGrid" Visibility="Visible">
-        <Grid Margin="0,0,0,0" x:Name="LetterGrid" Visibility="Visible">
+        <Grid Margin="0,0,0,0" x:Name="LetterGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition />
@@ -155,7 +155,7 @@
             </Button>
 
         </Grid>
-        <Grid x:Name="Analisys" Visibility="Hidden">
+        <Grid x:Name="Analisys" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="279*"/>
                 <ColumnDefinition Width="238*"/>
@@ -169,10 +169,25 @@
             </Button>
             <Button  Margin="81,81,174,509" Name="ButtonMinus">-
             </Button>
+            <Button  Margin="91,186,66,399" Name="ButtonCryptoAnalisys" >Analisys
+            </Button>
             <ComboBox Name="ModeList" Height="33" VerticalAlignment="Top" Margin="10,186,193,0">
                 <TextBlock>Cipher</TextBlock>
                 <TextBlock>Decipher</TextBlock>
             </ComboBox>
+            <Grid Margin="0,286,0,191" x:Name="CryptoAnalisysGrid" Visibility="Visible" Grid.ColumnSpan="2" RenderTransformOrigin="0.499,0.501">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="43*"/>
+                </Grid.ColumnDefinitions>
+
+            </Grid>
         </Grid>
     </Grid>
 

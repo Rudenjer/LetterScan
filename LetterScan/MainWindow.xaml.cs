@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,7 @@ namespace LetterScan
             }
             
             ButtonAnalisys.Click += Button_Click;
+            ButtonCryptoAnalisys.Click += ButtonCryptoAnalisys_Click;
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -193,6 +195,70 @@ namespace LetterScan
         {
             LetterGrid.Visibility = System.Windows.Visibility.Hidden;
             Analisys.Visibility= System.Windows.Visibility.Visible;
+        }
+
+        private void ButtonCryptoAnalisys_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<char,int> Letters = new Dictionary<char, int>();
+            Dictionary<char,int> Shift = new Dictionary<char, int>();
+            Shift.Add('о', 15);
+            Shift.Add('е', 0);
+            Shift.Add('а', 0);
+            Shift.Add('и', 0);
+
+            foreach (char symbol in TB2.Text)
+            {
+                if (LatAlphabet.Contains(symbol.ToString()))
+                {
+                    if (!Letters.ContainsKey(symbol))
+                    {
+                        Letters.Add(symbol,1);
+                    }
+                    else
+                    {
+                        Letters[symbol]++;
+                    }
+                }
+            }
+
+            char MostLetter=Letters.First(x=>x.Value==Letters.Values.Max()).Key;
+
+            int pos1=Array.IndexOf(LatAlphabet, MostLetter.ToString());
+            if (pos1 > Shift['о'])
+                Shift['о'] = pos1 - Shift['о'];
+            else
+            {
+                Shift['о'] = Shift['о']- pos1;
+            }
+
+
+
+
+
+            char[] inputString = TB2.Text.ToCharArray();
+            string outputString = "";
+            int shift = Convert.ToInt32(TBNumber.Text);
+            int ind = 0;
+            foreach (char letter in inputString)
+            {
+                if (LatAlphabet.Contains(letter.ToString()))
+                {
+                    int letterNum = Array.IndexOf(LatAlphabet, inputString[ind].ToString());
+                    letterNum = (letterNum - Shift['о'] + LatAlphabet.Length) % (LatAlphabet.Length);
+
+                    outputString += LatAlphabet[letterNum];
+                }
+                else
+                {
+                    outputString += letter;
+
+                }
+                ind++;
+            }
+
+            TB1.Text = outputString;
+
+
         }
     }
 }
