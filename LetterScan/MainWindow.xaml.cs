@@ -199,12 +199,22 @@ namespace LetterScan
 
         private void ButtonCryptoAnalisys_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<char,int> Letters = new Dictionary<char, int>();
-            Dictionary<char,int> Shift = new Dictionary<char, int>();
+            Dictionary<char, int> Shift = new Dictionary<char, int>();
             Shift.Add('о', 15);
-            Shift.Add('е', 0);
+            Shift.Add('е', 5);
             Shift.Add('а', 0);
-            Shift.Add('и', 0);
+            Shift.Add('и', 9);
+            Label1.Content = Analizer(Shift['о']);
+            Label2.Content = Analizer(Shift['е']);
+            Label3.Content = Analizer(Shift['а']);
+            Label4.Content = Analizer(Shift['и']);
+
+        }
+
+        public string Analizer(int letShift)
+        {
+            Dictionary<char, int> Letters = new Dictionary<char, int>();
+            
 
             foreach (char symbol in TB2.Text)
             {
@@ -212,7 +222,7 @@ namespace LetterScan
                 {
                     if (!Letters.ContainsKey(symbol))
                     {
-                        Letters.Add(symbol,1);
+                        Letters.Add(symbol, 1);
                     }
                     else
                     {
@@ -221,18 +231,15 @@ namespace LetterScan
                 }
             }
 
-            char MostLetter=Letters.First(x=>x.Value==Letters.Values.Max()).Key;
+            char MostLetter = Letters.First(x => x.Value == Letters.Values.Max()).Key;
 
-            int pos1=Array.IndexOf(LatAlphabet, MostLetter.ToString());
-            if (pos1 > Shift['о'])
-                Shift['о'] = pos1 - Shift['о'];
+            int pos1 = Array.IndexOf(LatAlphabet, MostLetter.ToString());
+            if (pos1 > letShift)
+                letShift = pos1 - letShift;
             else
             {
-                Shift['о'] = Shift['о']- pos1;
+                letShift = letShift - pos1;
             }
-
-
-
 
 
             char[] inputString = TB2.Text.ToCharArray();
@@ -244,7 +251,7 @@ namespace LetterScan
                 if (LatAlphabet.Contains(letter.ToString()))
                 {
                     int letterNum = Array.IndexOf(LatAlphabet, inputString[ind].ToString());
-                    letterNum = (letterNum - Shift['о'] + LatAlphabet.Length) % (LatAlphabet.Length);
+                    letterNum = (letterNum - letShift + LatAlphabet.Length) % (LatAlphabet.Length);
 
                     outputString += LatAlphabet[letterNum];
                 }
@@ -256,9 +263,8 @@ namespace LetterScan
                 ind++;
             }
 
-            TB1.Text = outputString;
-
-
+            return outputString;
+            
         }
     }
 }

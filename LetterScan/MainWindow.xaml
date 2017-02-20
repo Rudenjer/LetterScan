@@ -186,7 +186,10 @@
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="43*"/>
                 </Grid.ColumnDefinitions>
-
+                <Label Content="Label" Grid.Column="1" Grid.Row="0" Name="Label1"></Label>
+                <Label Content="Labe2" Grid.Column="1" Grid.Row="1" Name="Label2"></Label>
+                <Label Content="Labe3" Grid.Column="1" Grid.Row="2" Name="Label3"></Label>
+                <Label Content="Labe4" Grid.Column="1" Grid.Row="3" Name="Label4"></Label>
             </Grid>
         </Grid>
     </Grid>
