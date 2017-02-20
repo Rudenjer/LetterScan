@@ -28,16 +28,27 @@ namespace LetterScan
         private Dictionary<string, Rectangle> Rectangles;
         private string[] LatAlphabet;
         private int[] CurLetters;
+        private bool Window;
+
+        private Dictionary<char, int> Shift;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Window = true;
 
             LatAlphabet = new string[]
             {
                 "а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п",
                 "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ь", "ъ", "ы", "э", "ю", "я"
             };
+
+            Shift = new Dictionary<char, int>();
+            Shift.Add('о', 15);
+            Shift.Add('е', 5);
+            Shift.Add('а', 0);
+            Shift.Add('и', 9);
 
             //LatAlphabet = new string[]
             //{
@@ -80,8 +91,8 @@ namespace LetterScan
                 }
             }
             
-            ButtonAnalisys.Click += Button_Click;
             ButtonCryptoAnalisys.Click += ButtonCryptoAnalisys_Click;
+            ButtonSwitch.Click += ButtonSwitch_Click;
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -199,16 +210,30 @@ namespace LetterScan
 
         private void ButtonCryptoAnalisys_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<char, int> Shift = new Dictionary<char, int>();
-            Shift.Add('о', 15);
-            Shift.Add('е', 5);
-            Shift.Add('а', 0);
-            Shift.Add('и', 9);
+            
             Label1.Content = Analizer(Shift['о']);
             Label2.Content = Analizer(Shift['е']);
             Label3.Content = Analizer(Shift['а']);
             Label4.Content = Analizer(Shift['и']);
 
+        }
+
+        private void ButtonSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            if (Window)
+            {
+                LetterGrid.Visibility = System.Windows.Visibility.Visible;
+                Analisys.Visibility = System.Windows.Visibility.Hidden;
+                Window = false;
+                ButtonSwitch.Content = "Перейти к анализу";
+            }
+            else
+            {
+                LetterGrid.Visibility = System.Windows.Visibility.Hidden;
+                Analisys.Visibility = System.Windows.Visibility.Visible;
+                Window = true;
+                ButtonSwitch.Content = "Перейти к статистике";
+            }
         }
 
         public string Analizer(int letShift)

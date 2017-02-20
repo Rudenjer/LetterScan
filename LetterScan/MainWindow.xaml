@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LetterScan"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="525">
+        Title="LetterScan" Height="653" Width="525">
     <Grid Margin="0,0,0,0" x:Name="MainGrid" Visibility="Visible">
-        <Grid Margin="0,0,0,0" x:Name="LetterGrid" Visibility="Hidden">
+        <Grid Margin="0,0,0,52" x:Name="LetterGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition />
@@ -151,9 +151,6 @@
             <Rectangle Grid.Column="2" Grid.Row="31" Fill="Crimson" Width="0" HorizontalAlignment="Left" Name="Rectangle31"></Rectangle>
             <Rectangle Grid.Column="2" Grid.Row="32" Fill="Crimson" Width="0" HorizontalAlignment="Left" Name="Rectangle32"></Rectangle>
             <Rectangle Grid.Column="2" Grid.Row="33" Fill="Crimson" Width="0" HorizontalAlignment="Left" Name="Rectangle33"></Rectangle>
-            <Button Grid.Column="0" Grid.Row="0" Margin="0,82,0,5" Name="ButtonAnalisys">Decoding
-            </Button>
-
         </Grid>
         <Grid x:Name="Analisys" Visibility="Visible">
             <Grid.ColumnDefinitions>
@@ -163,15 +160,12 @@
             <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10,10,10,543" TextChanged="CodeTextEnter_OnTextChanged" Name="TB1" Grid.ColumnSpan="2">
             </TextBox>
             <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10,115,10,438" TextChanged="DecodeTextEnter_OnTextChanged" Name="TB2" Grid.ColumnSpan="2"/>
-            <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10,81,232,509" Name="TBNumber">0
+            <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="64,81,178,509" Name="TBNumber">0
             </TextBox>
-            <Button  Margin="52,81,203,509" Name="ButtonPlus">+
+            <Button  Margin="91,186,66,403" Name="ButtonCryptoAnalisys" >Анализ
             </Button>
-            <Button  Margin="81,81,174,509" Name="ButtonMinus">-
-            </Button>
-            <Button  Margin="91,186,66,399" Name="ButtonCryptoAnalisys" >Analisys
-            </Button>
-            <ComboBox Name="ModeList" Height="33" VerticalAlignment="Top" Margin="10,186,193,0">
+
+            <ComboBox Name="ModeList" Height="24" VerticalAlignment="Top" Margin="10,186,193,0">
                 <TextBlock>Cipher</TextBlock>
                 <TextBlock>Decipher</TextBlock>
             </ComboBox>
@@ -186,12 +180,21 @@
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="43*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Label" Grid.Column="1" Grid.Row="0" Name="Label1"></Label>
-                <Label Content="Labe2" Grid.Column="1" Grid.Row="1" Name="Label2"></Label>
-                <Label Content="Labe3" Grid.Column="1" Grid.Row="2" Name="Label3"></Label>
-                <Label Content="Labe4" Grid.Column="1" Grid.Row="3" Name="Label4"></Label>
+
+                <Label Content="" Grid.Column="1" Grid.Row="0" Name="Label1"></Label>
+                <Label Content="" Grid.Column="1" Grid.Row="1" Name="Label2"></Label>
+                <Label Content="" Grid.Column="1" Grid.Row="2" Name="Label3"></Label>
+                <Label Content="" Grid.Column="1" Grid.Row="3" Name="Label4"></Label>
+                <Label Content="Сдвиг" Name="Label5" Margin="10,-208,452,209" Grid.ColumnSpan="2"/>
+                <Label Content="о" Grid.Column="0" Grid.Row="0" Name="Label6"></Label>
+                <Label Content="е" Grid.Column="0" Grid.Row="1" Name="Label7"></Label>
+                <Label Content="а" Grid.Column="0" Grid.Row="2" Name="Label8"></Label>
+                <Label Content="и" Grid.Column="0" Grid.Row="3" Name="Label9"></Label>
+
             </Grid>
         </Grid>
+        <Button Margin="10,575,10,10" Name="ButtonSwitch">Перейти к статистике
+        </Button>
     </Grid>
 
 </Window>
